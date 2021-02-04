@@ -172,7 +172,7 @@
 //
 // }
 
-function getMin(){
+// function getMin() {
 //     let a = arguments.length
 //        let b = arguments[0];
 //        for(var i=0; i<a; i++){
@@ -185,103 +185,273 @@ function getMin(){
 // }
 //
 // console.log(getMin(12,45,26,7,78,76,1))
+// }
 
-    let Ingredients = {
-        "Мясо": {
-            "Свенина": "450 грамм",
-            "Говядина": "450 грамм",
-            "Курица": "450 грамм",
-        },
-        "Мясные изделия": {
-            "Ветчина": "300 грамм",
-            "Колбаса": "300 грамм",
-            "Копчености": "300 грамм",
-        },
-        "Растительное масло": "2 Ст.ложки",
-        "Чеснок": "2-4 Зубчиков",
-        "Луковица": "1 штука",
-        "Томатная паста": "2 Ст.ложка",
-        "Маринованные огурчики": "2-4 штуки",
-        "Маслины": "По вкусу(+ каперсы по желанию)",
-        "Соль, перец, специи, зелень": "По вкусу",
-        "Лимон и сметана": "По вкусу",
-    }
+let Ingredients = {
+    "Мясо": {
+        "Свенина": "450 грамм",
+        "Говядина": "450 грамм",
+        "Курица": "450 грамм",
+    },
+    "Мясные изделия": {
+        "Ветчина": "300 грамм",
+        "Колбаса": "300 грамм",
+        "Копчености": "300 грамм",
+    },
+    "Растительное масло": "2 Ст.ложки",
+    "Чеснок": "2-4 Зубчиков",
+    "Луковица": "1 штука",
+    "Томатная паста": "2 Ст.ложка",
+    "Маринованные огурчики": "2-4 штуки",
+    "Маслины": "По вкусу(+ каперсы по желанию)",
+    "Соль, перец, специи, зелень": "По вкусу",
+    "Лимон и сметана": "По вкусу",
+    "Мясо": [
+        {name:"Свенина", weight: 450, until: "грамм"},
+        {name:"Говядина", weight: 450, until: "грамм"},
+        {name:"Курица", weight: 450, until: "грамм"},
+    ],
+    "Мясные изделия": [
+        {name:"Ветчина", weight: 300, until: "грамм"},
+        {name:"Колбаса", weight: 300, until: "грамм"},
+        {name:"Копчености", weight: 300, until: "грамм"},
+    ],
 
+    "Растительное масло":{quantity:2,until:"Ст.ложки" },
+    "Чеснок":{quantity:4 ,until:"зубчиков" },
+    "Луковица":{quantity:1 ,until:"штука" },
+    "Томатная паста":{quantity:2 ,until:"Ст.ложка" },
+    "Маринованные огурчики":{quantity:4 ,until:"штуки" },
+    "Маслины":{until:"По вкусу(+ каперсы по желанию)" },
+    "Специи":{until:"По вкусу" },
+    "Лимон и сметана":{until:"По вкусу" },
 
-    function showIngredients (obj){
-        let value="";
-        for( var keys in obj){
-            var b = obj[keys]
-            if (typeof (b) == "object"){
-                for(var keys2 in b){
-                    value += `${keys}  -  ${keys2}  -  ${b[keys2]} или` + "\n"
+}
+function showIngredients (obj){
+    let value="";
+    for( var keys in obj){var b = obj[keys];
+
+        if(obj[keys] instanceof Array) {
+            // console.log(obj[keys])
+            // console.log(keys)
+
+            for (var i = 0; i < b.length; i++) {
+                var resoultArray = b[i]
+                // console.log(resoultArray)
+                if (i !== b.length-1){
+                    value += `${keys} - ${resoultArray.name} - ${resoultArray.weight} - ${resoultArray.until} или` + "\n";
                 }
-            } else {
-                value += `${keys}  -  ${obj[keys]}` + "\n"
+                else {
+                    value += `${keys} - ${resoultArray.name} - ${resoultArray.weight} - ${resoultArray.until}` + "\n";
+                }
             }
         }
-        alert(`ИНГРЕДИЕНТЫ ДЛЯ СОЛЯНКИ:`+ "\n" + value)
-    }
-    function inputValueIngredients(obj) {
-        let newObj = {...obj, "Мясо": {...obj["Мясо"]}, "Мясные изделия": {...obj["Мясные изделия"]}}
-        var i = 0;
-        var value = "";
-        var value2 = [];
-        for (var keys in newObj) {
-            i++;
+        else {
+            // console.log(obj[keys])
+            value += `${keys}${(!obj[keys].quantity)? "" : ` - ${obj[keys].quantity}`} - ${obj[keys].until}` + "\n";
         }
+    }
+    alert(`ИНГРЕДИЕНТЫ ДЛЯ СОЛЯНКИ:`+ "\n" + value);
+}
 
-        for (i-3; 0 < i; i--) {
+function inputValueIngredients(obj) {
+    var j = 0;
+    for (var keys in obj) {
+        j++;
+    }
+    var valueString = [] ;
+    var valueNumber = [];
+    for (var i = 0; j > i; i++ ){
 
-            switch (i){
-                case 7:
-                    value2.push(prompt("Укажите какой тип мяса вы используете: Свенина, говядина, курица - через зяпятую укажите вес", "Тип мяса, 450"  ))
-                    break
-                case 6:
-                    value2.push(prompt("Укажите какой тип мясных изделий вы используете: Ветчина, Колбаса, Копчености - через зяпятую укажите вес", "Мясныe изделия,300"  ))
-                    break
-                case 5:
-                    value2.push(prompt("Сколько зубочков чеснока вы используете?  ", "2"  ))
-                    break
-                case 4:
-                    value2.push(prompt("Сколько столовых ложек Растительного масла вы используете? ", "2-4"  ))
-                    break
-                case 3:
-                    value2.push(prompt("Сколько луковиц вы используете? ", "1"  ))
-                    break
-                case 2:
-                    value2.push(prompt("Сколько столовых ложек  Томатной пасты вы используете? ", "2"  ))
-                    break
-                case 1:
-                    value2.push(prompt("Сколько Маринованных огурцрв вы используете? ", "2-4"  ))
-                    break
+        if (i == 0){
+            if(!valueString[i]){
+                valueString.push(prompt("Укажите какой тип мяса вы используете: ", "Свенина, говядина, курица"));
+                if (valueString[i] === null || valueString[i] == " " || !(valueString[i].toLowerCase() == "Свенина".toLowerCase() || valueString[i].toLowerCase() == "Говядина".toLowerCase() || valueString[i].toLowerCase() == "Курица".toLowerCase())) {
+
+                    valueString.splice(i, 1);
+                    if (!valueString[i]){
+                        alert("Укажите правильный тип продукта");
+                    }
+                    i--
+                    continue;
+                }
             }
-            console.log(newObj["Мясные изделия"]["Ветчина"] == "300 грамм")
-            // for (var keys in newObj) {
-            //     var b = newObj[keys];
-            //
-            //     if (typeof (b) == "object") {
-            //
-            //         for (var keys2 in b) {
-            //             value += `${keys2}, `
-            //         }
-            //         console.log(value)
-            //
-            //     } else {
-            //         // value += `${keys}  -  ${obj[keys]}` + "\n"
-            //     }
-            //
-            // }
+            if (!valueNumber[i]){
+                valueNumber.push(parseInt(prompt("Укажите вес ингридиента: ", "450")));
+                if(isNaN(valueNumber[i]) || valueNumber[i] > 450 || valueNumber[i] < 450){
 
+                    valueNumber.splice(i, 1);
+                    if (!valueNumber[i]){
+                        alert("Вы указали не правильный вес");
+                    }
+                    i--;
+                    continue;
+                }
+            }
+            continue
+        }else if(i == 1){
+            if(!valueString[i]){
+                console.log(valueString[i])
+                valueString.push(prompt("Укажите какие Мясные изделия вы используете: ", "Ветчина, Колбаса, Копчености"))
+                console.log(valueString)
+                if (valueString[i] === null || valueString[i] == " " || !(valueString[i].toLowerCase() == "Ветчина".toLowerCase() || valueString[i].toLowerCase() == "Колбаса".toLowerCase() || valueString[i].toLowerCase() == "Копчености".toLowerCase())) {
+                    valueString.splice(i, 1)
+                    if (!valueString[i]){
+                        alert("Укажите правильный тип продукта")
+                    }
+                    i--
+                    continue
+                }
+            }
+            if (!valueNumber[i]) {
+                valueNumber.push(parseInt(prompt("Укажите вес ингридиента: ", "300")))
+                if (isNaN(valueNumber[i]) || valueNumber[i] > 300 || valueNumber[i] < 300) {
+                    valueNumber.splice(i, 1)
+                    console.log(!valueNumber[i])
+                    if (!valueNumber[i]) {
+                        alert("Вы указали не правильный вес")
+                    }
+                    i--
+                    continue
+                }
+            }
         }
+        else if(i == 2){
+            if (!valueNumber[i]) {
+                valueNumber.push(parseInt(prompt("Сколько Ст. ложек Растительное масло вы используете: ", "2")))
+                if (isNaN(valueNumber[i]) || valueNumber[i] > 2 || valueNumber[i] < 2) {
+                    valueNumber.splice(i, 1)
+                    console.log(!valueNumber[i])
+                    if (!valueNumber[i]) {
+                        alert("Укажите правильное количество Растительное масло")
+                    }
+                    i--
+                    continue
+                }
+            }
+        }else if (i == 3){
+            if (!valueNumber[i]) {
+                valueNumber.push(parseInt(prompt("Сколько зубчиков чеснока  вы используете: ", "2")))
+                if (isNaN(valueNumber[i]) || valueNumber[i] > 2 || valueNumber[i] < 2) {
+                    valueNumber.splice(i, 1)
+                    console.log(!valueNumber[i])
+                    if (!valueNumber[i]) {
+                        alert("Укажите правильное количество зубчиков чеснока")
+                    }
+                    i--
+                    continue
+                }
+            }
+        }else if (i == 4){
+            if (!valueNumber[i]) {
+                valueNumber.push(parseInt(prompt("Сколько шт. Луковиц  вы используете: ", "1")))
+                if (isNaN(valueNumber[i]) || valueNumber[i] > 1 || valueNumber[i] < 1) {
+                    valueNumber.splice(i, 1)
+                    console.log(!valueNumber[i])
+                    if (!valueNumber[i]) {
+                        alert("Укажите правильное количество Луковиц")
+                    }
+                    i--
+                    continue
+                }
+            }
+        }else if (i == 5){
+            if (!valueNumber[i]) {
+                valueNumber.push(parseInt(prompt("Сколько Ст. ложек Томатной пасты  вы используете: ", "2")))
+                if (isNaN(valueNumber[i]) || valueNumber[i] > 2 || valueNumber[i] < 2) {
+                    valueNumber.splice(i, 1)
+                    console.log(!valueNumber[i])
+                    if (!valueNumber[i]) {
+                        alert("Укажите правильное количество Ст. ложек Томатной пасты")
+                    }
+                    i--
+                    continue
+                }
+            }
+        }else if (i == 6){
+            if (!valueNumber[i]) {
+                valueNumber.push(parseInt(prompt("Сколько Маринованных огурчиков  вы используете: ", "4")))
+                if (isNaN(valueNumber[i]) || valueNumber[i] > 4 || valueNumber[i] < 4) {
+                    valueNumber.splice(i, 1)
+                    console.log(!valueNumber[i])
+                    if (!valueNumber[i]) {
+                        alert("Укажите правильное количество Маринованных огурчиков")
+                    }
+                    i--
+                    continue
+                }
+            }
+        }
+
+    }
+    return true
+}
+function boilMeat(afterResoult){
+    if(afterResoult){
+        function finished(){
+            console.log("Можно вынимать мясушко")
+        }
+        console.log('Мясо вымойте, выложите в кастрюлю и залейте водой. Туда же отправьте копчености. Можно также добавить лавровый лист и овощи для аромата. Варите бульон на медленном огне пару часов до готовности мяса. Подробнее: https://povar.ru/recipes/sup-solyanka_klassicheskii_recept-54159.html')
+        setTimeout(finished, 26000);
+        return true;
+    }else {
+        console.log('Нет ингридиентов ')
+        return false
     }
 
-    function CookingHodgepodge(Ingredients){
-        showIngredients(Ingredients)
-        inputValueIngredients(Ingredients)
+}
+
+function coldAndChop(afterResoult){
+    if(afterResoult){
+        function coolTheMeat(){
+            console.log("Месо остыло можно нарезать")
+        }
+        console.log('Когда мясо сварилось, аккуратно достаньте его из бульона, остудите немного и измельчите. Бульон процедите и снова отправьте на огонь. Выложите туда нарезанное мясо. Подробнее: https://povar.ru/recipes/sup-solyanka_klassicheskii_recept-54159.html')
+        setTimeout(coolTheMeat, 26000);
+        return true;
+    }else {
+        console.log('Мясо еще не сварилось')
+        return false
     }
-
-
-
-
-    CookingHodgepodge(Ingredients);
+}
+function addDeliMeats(afterResoult){
+    if(afterResoult){
+        function addDeli(){
+            console.log("Деликатесы положили")
+        }
+        console.log('Следом отправьте мясные деликатесы. В данном случае это ветчина и салями. Подробнее: https://povar.ru/recipes/sup-solyanka_klassicheskii_recept-54159.html')
+        setTimeout(addDeli, 2000);
+        return true;
+    }else {
+        console.log('Проверь прошлое дествие ')
+        return false
+    }
+}
+function cutting(afterResoult){
+    if(afterResoult){
+        function cutting(){
+            console.log("Нарезали выпили и закусили ")
+        }
+        console.log('Нарежьте огурчики. Маслины можно добавлять перед подачей в тарелку или сразу отправить в бульон. Я предпочитаю второй вариант. Кроме того, я советую добавить горсть каперсов. Подробнее: https://povar.ru/recipes/sup-solyanka_klassicheskii_recept-54159.html')
+        setTimeout(cutting, 4000);
+        alert(" да бы не писать повторящий код выложу все остальные действия в консоле")
+        console.log("Выложите все в бульон, доведите до кипения и варите на медленном огне. Посолите по вкусу. Подробнее: https://povar.ru/recipes/sup-solyanka_klassicheskii_recept-54159.html")
+        console.log("Параллельно очистите и измельчите лук с чесноком. Выложите на сковороду с растительным маслом и обжарьте. Добавьте томатную пасту и влейте немного бульона или рассола от огурцов. Подробнее: https://povar.ru/recipes/sup-solyanka_klassicheskii_recept-54159.html")
+        console.log("Параллельно очистите и измельчите лук с чесноком. Выложите на сковороду с растительным маслом и обжарьте. Добавьте томатную пасту и влейте немного бульона или рассола от огурцов. Подробнее: https://povar.ru/recipes/sup-solyanka_klassicheskii_recept-54159.html")
+        console.log("Выложите его в бульон, аккуратно перемешайте и варите солянку еще минут 5-7. Подробнее: https://povar.ru/recipes/sup-solyanka_klassicheskii_recept-54159.html")
+        console.log("Выключите огонь, накройте кастрюлю крышкой и оставьте на полчасика, чтобы солянка настоялась. Подавайте к столу горячей, дополнив лимоном и сметаной по желанию. Приятного аппетита! Подробнее: https://povar.ru/recipes/sup-solyanka_klassicheskii_recept-54159.html")
+        return true;
+    }else {
+        console.log('Забыл деликатесик ты добавить')
+        return false
+    }
+}
+async function CookingHodgepodge(Ingredients){
+    await  showIngredients(Ingredients)
+    await boilMeat(inputValueIngredients(Ingredients))
+    await coldAndChop(boilMeat)
+    await addDeliMeats(coldAndChop)
+    await cutting(addDeliMeats)
+    await alert("Вкусняха то кая, что значит папкин рецепт")
+}
+CookingHodgepodge(Ingredients)
