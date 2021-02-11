@@ -509,65 +509,116 @@ let lastName = document.getElementById('lastname');
 let email = document.getElementById('emailAddres');
 let password = document.getElementById('password');
 let sendForm = document.getElementById('sendForm');
+let form = document.getElementById('form');
 
 
-function checkSpace(str){
+function checkSpace(str) {
     let length = str.length;
     let boole;
-    for(let i = 0; i < length; i++){
-        if (str[i] == " "){
+    for (let i = 0; i < length; i++) {
+        if (str[i] == " ") {
+            Alert('Введите текст без пробелов')
             return false
-        }else{
+        } else {
             boole = true;
         }
     }
     return boole
 }
-function checkStr(str){
 
+function checkStr(str) {
+    let value
+    for (let i =0; i < str.length; i++){
+
+        if (!isNaN(str[i])) {
+            alert('Цифры тут не нужны')
+            return false;
+        } else {
+            value = true;
+        }
+    }
+    return value
 }
-function checkEmail(str){
-    if(str.indexOf('@gmail.com') == str.lastIndexOf('@gmail.com')){
+
+function checkEmail(str) {
+    if (str.indexOf('@gmail.com') == str.lastIndexOf('@gmail.com') && str.indexOf('@gmail.com') !== -1) {
         return true;
-    }else {
+    } else {
+        alert('Пример почты  jolli@gmail.com')
         return false;
     }
 }
-function checkFirstUpperCase (str){
-    if(str[0] == str[0].toUpperCase() ){
+
+function checkFirstUpperCase(str) {
+    if (str[0] == str[0].toUpperCase()) {
+        return true;
+    } else {
+        alert('С большой буквы пожалуйста')
+        return false;
+    }
+}
+
+function checkDot(str) {
+    if (str[0] == '.' || str[str.length - 1] == '.') {
+        alert('Давайте только без точек в начале или конце')
+        return false;
+    } else {
         return true;
     }
-    else {
-        return false;
-    }
 }
-function checkDot(str){
-    if(str[0] == '.' || str[str.length-1] == '.'){
-        return false;
-    }else {
-        return  true;
-    }
-}
-function checkPassword(str){
+
+function checkPassword(str) {
     // debugger
     let number = false
     let valueStr = false
-    for (let i = 0; i < str.length; i++){
-        if (!isNaN(str[i])){
+    for (let i = 0; i < str.length; i++) {
+        if (str.length < 8){
+            alert('Пароль не меньше 8 символов')
+            return false
+        }
+        if (!isNaN(str[i])) {
             number = true;
-        }else{
+        }
+        else{
             valueStr = true
         }
     }
-    return (number && valueStr)
+    if(number && valueStr){
+        return true
+    }{
+        alert('Пароль должен быть из цифр и букв');
+        return false;
+    }
+
 }
 
-sendForm.onclick = function (){
-    debugger
-    if (checkSpace(firstname.value) && checkStr(firstname.value) && checkDot(firstname.value) && checkFirstUpperCase(firstname.value) ){
+sendForm.onclick = function () {
+    if (checkSpace(firstname.value) && checkStr(firstname.value) && checkDot(firstname.value) && checkFirstUpperCase(firstname.value)) {
         firstname.style.border = '2px solid green'
-    }else{
-        firstname.value = ''
+    } else {
         firstname.style.border = '2px solid red'
+        return
     }
+
+    if (checkSpace(lastName.value) && checkStr(lastName.value) && checkDot(lastName.value) && checkFirstUpperCase(lastName.value)) {
+        lastName.style.border = '2px solid green'
+    } else {
+        lastName.style.border = '2px solid red'
+        return
+    }
+
+    if (checkSpace(email.value) && checkDot(email.value) && checkEmail(email.value) ) {
+        email.style.border = '2px solid green'
+    } else {
+        email.style.border = '2px solid red'
+        return
+    }
+    if (checkPassword(password.value)) {
+        password.style.border = '2px solid green'
+    } else {
+        password.style.border = '2px solid red'
+        return
+    }
+
+    // form.createElement('<div>')
 }
