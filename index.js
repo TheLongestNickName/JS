@@ -456,50 +456,86 @@
 // }
 // CookingHodgepodge(Ingredients)
 
-let blackArr = [8, 17, 3, 48, 15, 14, 1];
+// let blackArr = [8, 17, 3, 48, 15, 14, 1];
+//
+// function minNubers(arrs){
+//     let value;
+//     let value2;
+//     for (let i = 0; i <arrs.length; i++){
+//         if (!value){
+//             value = arrs[i]
+//         }
+//         if (arrs[i] < value){
+//             value2 = value
+//             value = arrs[i]
+//
+//         }
+//     }
+//     return (value+value2)
+// }
+//
+// console.log(minNubers(blackArr))
+//
+//
+// function house (argument) {
+//     if (house.caller.name == 'serega') {
+//         var input = +prompt();
+//
+//         var nuberOfStoreys = 11;
+//         var entranceNumber = 10;
+//         var numberOfQuartics = 5;
+//
+//         if (input < 1 || input > nuberOfStoreys * entranceNumber * numberOfQuartics) {
+//             return "incorected number"
+//         }
+//
+//
+//         var apartmentsInTheEntrance = nuberOfStoreys * numberOfQuartics
+//         var entranceBefore = Math.trunc((input - 1) / apartmentsInTheEntrance)
+//         var storey = Math.trunc((((input - 1 - entranceBefore * apartmentsInTheEntrance)) / numberOfQuartics) + 1)
+//         return (entranceBefore + 1 + " - " + storey)
+//
+//         return (value + value2)
+//     }
+// }
+//
+// function  serega(){
+//     house()
+// }
+// serega()
 
-function minNubers(arrs){
-    let value;
-    let value2;
-    for (let i = 0; i <arrs.length; i++){
-        if (!value){
-            value = arrs[i]
+
+class MyArray extends Array{
+    constructor(...arr) {
+        if (isNaN(...arr)){
+            return
         }
-        if (arrs[i] < value){
-            value2 = value
-            value = arrs[i]
+        super(...arr);
+    }
+    push(...arr){
+        if (isNaN(...arr)){
+            return
+        }else{
+            super.push(...arr)
+        }
 
+    }
+}
+
+var b = new MyArray(1,2,3,4,5)
+b.push(1)
+
+b = new Proxy(b,{
+    set(target, p, value, receiver) {
+        if (typeof value == 'number'){
+            target[p] = value;
+            console.log('зашло')
+            return true
+        }else{
+            console.log('не зашло')
+            return false
         }
     }
-    return (value+value2)
-}
-
-console.log(minNubers(blackArr))
-
-
-function house (argument) {
-    if (house.caller.name == 'serega') {
-        var input = +prompt();
-
-        var nuberOfStoreys = 11;
-        var entranceNumber = 10;
-        var numberOfQuartics = 5;
-
-        if (input < 1 || input > nuberOfStoreys * entranceNumber * numberOfQuartics) {
-            return "incorected number"
-        }
-
-
-        var apartmentsInTheEntrance = nuberOfStoreys * numberOfQuartics
-        var entranceBefore = Math.trunc((input - 1) / apartmentsInTheEntrance)
-        var storey = Math.trunc((((input - 1 - entranceBefore * apartmentsInTheEntrance)) / numberOfQuartics) + 1)
-        return (entranceBefore + 1 + " - " + storey)
-
-        return (value + value2)
-    }
-}
-
-function  serega(){
-    house()
-}
-serega()
+})
+b[5] = 10;
+console.log(b)
