@@ -456,50 +456,118 @@
 // }
 // CookingHodgepodge(Ingredients)
 
-let blackArr = [8, 17, 3, 48, 15, 14, 1];
+// let blackArr = [8, 17, 3, 48, 15, 14, 1];
+//
+// function minNubers(arrs){
+//     let value;
+//     let value2;
+//     for (let i = 0; i <arrs.length; i++){
+//         if (!value){
+//             value = arrs[i]
+//         }
+//         if (arrs[i] < value){
+//             value2 = value
+//             value = arrs[i]
+//
+//         }
+//     }
+//     return (value+value2)
+// }
+//
+// console.log(minNubers(blackArr))
+//
+//
+// function house (argument) {
+//     if (house.caller.name == 'serega') {
+//         var input = +prompt();
+//
+//         var nuberOfStoreys = 11;
+//         var entranceNumber = 10;
+//         var numberOfQuartics = 5;
+//
+//         if (input < 1 || input > nuberOfStoreys * entranceNumber * numberOfQuartics) {
+//             return "incorected number"
+//         }
+//
+//
+//         var apartmentsInTheEntrance = nuberOfStoreys * numberOfQuartics
+//         var entranceBefore = Math.trunc((input - 1) / apartmentsInTheEntrance)
+//         var storey = Math.trunc((((input - 1 - entranceBefore * apartmentsInTheEntrance)) / numberOfQuartics) + 1)
+//         return (entranceBefore + 1 + " - " + storey)
+//
+//         return (value + value2)
+//     }
+// }
+//
+// function  serega(){
+//     house()
+// }
+// serega()
 
-function minNubers(arrs){
-    let value;
-    let value2;
-    for (let i = 0; i <arrs.length; i++){
-        if (!value){
-            value = arrs[i]
-        }
-        if (arrs[i] < value){
-            value2 = value
-            value = arrs[i]
+let firstname = document.getElementById('firsName');
+let lastName = document.getElementById('lastname');
+let email = document.getElementById('emailAddres');
+let password = document.getElementById('password');
+let sendForm = document.getElementById('sendForm');
 
+
+function checkSpace(str){
+    let length = str.length;
+    let boole;
+    for(let i = 0; i < length; i++){
+        if (str[i] == " "){
+            return false
+        }else{
+            boole = true;
         }
     }
-    return (value+value2)
+    return boole
 }
+function checkStr(str){
 
-console.log(minNubers(blackArr))
-
-
-function house (argument) {
-    if (house.caller.name == 'serega') {
-        var input = +prompt();
-
-        var nuberOfStoreys = 11;
-        var entranceNumber = 10;
-        var numberOfQuartics = 5;
-
-        if (input < 1 || input > nuberOfStoreys * entranceNumber * numberOfQuartics) {
-            return "incorected number"
-        }
-
-
-        var apartmentsInTheEntrance = nuberOfStoreys * numberOfQuartics
-        var entranceBefore = Math.trunc((input - 1) / apartmentsInTheEntrance)
-        var storey = Math.trunc((((input - 1 - entranceBefore * apartmentsInTheEntrance)) / numberOfQuartics) + 1)
-        return (entranceBefore + 1 + " - " + storey)
-
-        return (value + value2)
+}
+function checkEmail(str){
+    if(str.indexOf('@gmail.com') == str.lastIndexOf('@gmail.com')){
+        return true;
+    }else {
+        return false;
     }
 }
-
-function  serega(){
-    house()
+function checkFirstUpperCase (str){
+    if(str[0] == str[0].toUpperCase() ){
+        return true;
+    }
+    else {
+        return false;
+    }
 }
-serega()
+function checkDot(str){
+    if(str[0] == '.' || str[str.length-1] == '.'){
+        return false;
+    }else {
+        return  true;
+    }
+}
+function checkPassword(str){
+    // debugger
+    let number = false
+    let valueStr = false
+    for (let i = 0; i < str.length; i++){
+        if (!isNaN(str[i])){
+            number = true;
+        }else{
+            valueStr = true
+        }
+    }
+    return (number && valueStr)
+}
+
+sendForm.onclick = function (){
+    debugger
+    if (checkSpace(firstname.value) && checkStr(firstname.value) && checkDot(firstname.value) && checkFirstUpperCase(firstname.value) ){
+        firstname.style.border = '2px solid green'
+    }else{
+        firstname.value = ''
+        firstname.style.border = '2px solid red'
+    }
+}
