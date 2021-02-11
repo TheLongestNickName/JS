@@ -505,37 +505,59 @@
 // serega()
 
 
-class MyArray extends Array{
-    constructor(...arr) {
-        if (isNaN(...arr)){
-            return
-        }
-        super(...arr);
-    }
-    push(...arr){
-        if (isNaN(...arr)){
-            return
-        }else{
-            super.push(...arr)
-        }
+// class MyArray extends Array{
+//     constructor(...arr) {
+//         if (isNaN(...arr)){
+//             return
+//         }
+//         super(...arr);
+//     }
+//     push(arr){
+//         if (isNaN(arr)){
+//             return
+//         }else{
+//             super.push(...arr)
+//         }
+//
+//     }
+// }
+//
+// var b = new MyArray(1,2,3,4,5)
+// b.push(1,"a", NaN)
+// console.log(b)
+//
+// b = new Proxy(b,{
+//     set(target, p, value, receiver) {
+//         if (typeof value == 'number'){
+//             target[p] = value;
+//             console.log('зашло')
+//             return true
+//         }else{
+//             console.log('не зашло')
+//             return false
+//         }
+//     }
+// })
+// b[5] = 10;
+// console.log(b)
 
+
+// ES-5
+
+function MyArray (a,b){
+    let numb = []
+    for (let i = 0; i<arguments.length; i++){
+        if (isNaN(arguments[i])){
+             throw new Error('only number');
+        }
+        else {
+            numb.push(parseInt(arguments[i]))
+        }
     }
+     return Array.call(this,...numb)
+
 }
 
-var b = new MyArray(1,2,3,4,5)
-b.push(1)
 
-b = new Proxy(b,{
-    set(target, p, value, receiver) {
-        if (typeof value == 'number'){
-            target[p] = value;
-            console.log('зашло')
-            return true
-        }else{
-            console.log('не зашло')
-            return false
-        }
-    }
-})
-b[5] = 10;
+var b = new MyArray(1,'2', 3,4,5)
 console.log(b)
