@@ -504,121 +504,148 @@
 // }
 // serega()
 
-let firstname = document.getElementById('firsName');
-let lastName = document.getElementById('lastname');
-let email = document.getElementById('emailAddres');
-let password = document.getElementById('password');
-let sendForm = document.getElementById('sendForm');
-let form = document.getElementById('form');
+// let firstname = document.getElementById('firsName');
+// let lastName = document.getElementById('lastname');
+// let email = document.getElementById('emailAddres');
+// let password = document.getElementById('password');
+// let sendForm = document.getElementById('sendForm');
+// let form = document.getElementById('form');
+//
+//
+// function checkSpace(str) {
+//     let length = str.length;
+//     let boole;
+//     for (let i = 0; i < length; i++) {
+//         if (str[i] == " ") {
+//             Alert('Введите текст без пробелов')
+//             return false
+//         } else {
+//             boole = true;
+//         }
+//     }
+//     return boole
+// }
+//
+// function checkStr(str) {
+//     let value
+//     for (let i =0; i < str.length; i++){
+//
+//         if (!isNaN(str[i])) {
+//             alert('Цифры тут не нужны')
+//             return false;
+//         } else {
+//             value = true;
+//         }
+//     }
+//     return value
+// }
+//
+// function checkEmail(str) {
+//     if (str.indexOf('@gmail.com') == str.lastIndexOf('@gmail.com') && str.indexOf('@gmail.com') !== -1) {
+//         return true;
+//     } else {
+//         alert('Пример почты  jolli@gmail.com')
+//         return false;
+//     }
+// }
+//
+// function checkFirstUpperCase(str) {
+//     if (str[0] == str[0].toUpperCase()) {
+//         return true;
+//     } else {
+//         alert('С большой буквы пожалуйста')
+//         return false;
+//     }
+// }
+//
+// function checkDot(str) {
+//     if (str[0] == '.' || str[str.length - 1] == '.') {
+//         alert('Давайте только без точек в начале или конце')
+//         return false;
+//     } else {
+//         return true;
+//     }
+// }
+//
+// function checkPassword(str) {
+//     // debugger
+//     let number = false
+//     let valueStr = false
+//     for (let i = 0; i < str.length; i++) {
+//         if (str.length < 8){
+//             alert('Пароль не меньше 8 символов')
+//             return false
+//         }
+//         if (!isNaN(str[i])) {
+//             number = true;
+//         }
+//         else{
+//             valueStr = true
+//         }
+//     }
+//     if(number && valueStr){
+//         return true
+//     }{
+//         alert('Пароль должен быть из цифр и букв');
+//         return false;
+//     }
+//
+// }
+//
+// sendForm.onclick = function () {
+//     if (checkSpace(firstname.value) && checkStr(firstname.value) && checkDot(firstname.value) && checkFirstUpperCase(firstname.value)) {
+//         firstname.style.border = '2px solid green'
+//     } else {
+//         firstname.style.border = '2px solid red'
+//         return
+//     }
+//
+//     if (checkSpace(lastName.value) && checkStr(lastName.value) && checkDot(lastName.value) && checkFirstUpperCase(lastName.value)) {
+//         lastName.style.border = '2px solid green'
+//     } else {
+//         lastName.style.border = '2px solid red'
+//         return
+//     }
+//
+//     if (checkSpace(email.value) && checkDot(email.value) && checkEmail(email.value) ) {
+//         email.style.border = '2px solid green'
+//     } else {
+//         email.style.border = '2px solid red'
+//         return
+//     }
+//     if (checkPassword(password.value)) {
+//         password.style.border = '2px solid green'
+//     } else {
+//         password.style.border = '2px solid red'
+//         return
+//     }
+//
+//     // form.createElement('<div>')
+// }
 
-
-function checkSpace(str) {
-    let length = str.length;
-    let boole;
-    for (let i = 0; i < length; i++) {
-        if (str[i] == " ") {
-            Alert('Введите текст без пробелов')
-            return false
-        } else {
-            boole = true;
+function boundedEnum(context){
+    Array.prototype.forEach.call(context,(item,i)=>{
+        if (typeof item == "string"){
+            let arr = item.split(',')
+            Array.prototype.forEach.call(arr, (innerItem)=>{
+                console.log(innerItem)
+            })
+        }else {
+            var input = Object.values(item);
+            if (input.length <= 0){
+                input = [...item];
+            }
+            Array.prototype.forEach.call(input, (innerItem)=>{
+                console.log(innerItem)
+            })
         }
-    }
-    return boole
+
+
+    })
 }
 
-function checkStr(str) {
-    let value
-    for (let i =0; i < str.length; i++){
-
-        if (!isNaN(str[i])) {
-            alert('Цифры тут не нужны')
-            return false;
-        } else {
-            value = true;
-        }
-    }
-    return value
+function myfunc(){
+    boundedEnum(arguments);
 }
 
-function checkEmail(str) {
-    if (str.indexOf('@gmail.com') == str.lastIndexOf('@gmail.com') && str.indexOf('@gmail.com') !== -1) {
-        return true;
-    } else {
-        alert('Пример почты  jolli@gmail.com')
-        return false;
-    }
-}
-
-function checkFirstUpperCase(str) {
-    if (str[0] == str[0].toUpperCase()) {
-        return true;
-    } else {
-        alert('С большой буквы пожалуйста')
-        return false;
-    }
-}
-
-function checkDot(str) {
-    if (str[0] == '.' || str[str.length - 1] == '.') {
-        alert('Давайте только без точек в начале или конце')
-        return false;
-    } else {
-        return true;
-    }
-}
-
-function checkPassword(str) {
-    // debugger
-    let number = false
-    let valueStr = false
-    for (let i = 0; i < str.length; i++) {
-        if (str.length < 8){
-            alert('Пароль не меньше 8 символов')
-            return false
-        }
-        if (!isNaN(str[i])) {
-            number = true;
-        }
-        else{
-            valueStr = true
-        }
-    }
-    if(number && valueStr){
-        return true
-    }{
-        alert('Пароль должен быть из цифр и букв');
-        return false;
-    }
-
-}
-
-sendForm.onclick = function () {
-    if (checkSpace(firstname.value) && checkStr(firstname.value) && checkDot(firstname.value) && checkFirstUpperCase(firstname.value)) {
-        firstname.style.border = '2px solid green'
-    } else {
-        firstname.style.border = '2px solid red'
-        return
-    }
-
-    if (checkSpace(lastName.value) && checkStr(lastName.value) && checkDot(lastName.value) && checkFirstUpperCase(lastName.value)) {
-        lastName.style.border = '2px solid green'
-    } else {
-        lastName.style.border = '2px solid red'
-        return
-    }
-
-    if (checkSpace(email.value) && checkDot(email.value) && checkEmail(email.value) ) {
-        email.style.border = '2px solid green'
-    } else {
-        email.style.border = '2px solid red'
-        return
-    }
-    if (checkPassword(password.value)) {
-        password.style.border = '2px solid green'
-    } else {
-        password.style.border = '2px solid red'
-        return
-    }
-
-    // form.createElement('<div>')
-}
+myfunc('66,2,3,45',{a:3, b:4}, [1,2,3,4,5,6], new Set([1,2,3,4]))
